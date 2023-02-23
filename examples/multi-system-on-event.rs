@@ -30,10 +30,20 @@ fn setup_parent(
     commands.add(StyleSheet::parse(
         "
         .img {
-            width: 50%;
-            height: 50%;
-          }
-    ",
+            width: 50px;
+            height: 50px;
+        }
+        #parent_1 {
+            width: 100%;
+            height: 50px;
+            background-color: #f44336;
+        }
+        #parent_2 {
+            width: 100%;
+            height: 50px;
+            background-color: #2196f3;
+        }
+        ",
     ));
 
     commands.spawn(Camera2dBundle::default());
@@ -57,8 +67,8 @@ fn setup_parent(
                 })> "add child 2" </button>
             </div>
             <div>
-                <br/><span {parent_1}> </span>
-                <br/><span {parent_2}> </span>
+                <br/><span id="parent_1" {parent_1}> </span>
+                <br/><span id="parent_2" {parent_2}> </span>
             </div>
         </body>
     });
@@ -70,7 +80,7 @@ fn setup_child_1(mut commands: Commands, mut ev_setup_child: EventReader<SetupCh
         commands.add(eml! {
             <span {content}>
                 <div>" Child 1 content with an image "</div>
-                <div><img src="icon.png"/></div>
+                <div><img c:img src="icon.png"/></div>
             </span>
         });
         commands.entity(ev.parent).push_children(&[content]);
